@@ -22,7 +22,7 @@ def analyze_frame(local_frame):
     tile_type = FLOOR
     if robot_pixels_number > 10000:
         start_pos = True
-    elif goto_pixels_number > 1000:
+    elif goto_pixels_number > 100:
         goto_pos = True
     elif danger_pixels_number > 1000:
         tile_type = DANGER

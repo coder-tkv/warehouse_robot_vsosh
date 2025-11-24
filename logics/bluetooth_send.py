@@ -1,11 +1,9 @@
-# import bluetooth
-import socket
+import bluetooth
 import os
 import dotenv
 
 dotenv.load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
-print(SECRET_KEY)
 
 
 def send_to_robot(to_send):
@@ -25,7 +23,7 @@ def send_to_robot(to_send):
             print("found target {} bluetooth device with address {} ".format(target_name, target_address))
             serverMACAddress = target_address
             port = 1
-            s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+            s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
             s.connect((serverMACAddress, port))
             print("connected to {}".format(target_name))
             s.send(bytes(SECRET_KEY + to_send, 'UTF-8'))

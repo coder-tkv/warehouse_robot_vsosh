@@ -1,8 +1,13 @@
-import socket
+import bluetooth
+import dotenv
+import os
+
+dotenv.load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 path = [[20, 12, 11, 3, 2], 2, [2, 3, 11, 12], 1 , [12, 20, 19, 18], 3, [18, 19, 20, 12, 13], 1]
 
-target_name = "ESP32BT"
+target_name = "ESP32BT-EGGR"
 target_address = None
 nearby_devices = bluetooth.discover_devices(lookup_names=True, lookup_class=True)
 print(nearby_devices)
@@ -14,10 +19,10 @@ if target_address is not None:
     print("found target {} bluetooth device with address {} ".format(target_name, target_address))
     serverMACAddress = target_address
     port = 1
-    s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+    s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
     s.connect((serverMACAddress, port))
     print("connected to {}".format(target_name))
-    text = "tkv"
+    text = SECRET_KEY
     for i in range(len(path)):
         if i % 2 == 0:
             text += 'p'

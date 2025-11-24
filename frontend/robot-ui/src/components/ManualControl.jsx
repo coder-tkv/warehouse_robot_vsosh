@@ -21,7 +21,7 @@ export default function ManualControl({ selected, setSelected }) {
     return (
         <>
             <p className="mode-description">
-                Выберите клетку или укажите координаты вручную.
+                Нажмите на клетку на поле.
             </p>
 
             <button className="btn-primary" onClick={sendCommand}>

@@ -2,9 +2,9 @@ import cv2
 from logics.config import *
 from logics.path_finder import dijkstra, get_matrix
 from logics.frame_analyzer import analyze_frame, get_rectangle
-# from bluetooth_send import send_to_robot
+from logics.bluetooth_send import send_to_robot
 
-video = cv2.VideoCapture(0)
+video = cv2.VideoCapture(1)
 
 def run(is_auto, goto_x=None, goto_y=None):
     global video
@@ -98,7 +98,7 @@ def run(is_auto, goto_x=None, goto_y=None):
         print('Путь:', to_send)
         print('-------------')
 
-        # send_to_robot(to_send)
+        send_to_robot(to_send)
 
     # cv2.imshow('VIDEO', frame)
     # cv2.waitKey()

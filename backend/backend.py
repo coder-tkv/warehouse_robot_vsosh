@@ -30,7 +30,7 @@ async def manual_mode(x: int, y: int, bg_tasks: BackgroundTasks):
 async def manual_mode():
     coords = logics_main.get_robot_pos()
     if coords is None:
-        raise HTTPException(status_code=500)
+        return {'x': 0, 'y': 0}
     return {'x': coords[0], 'y': coords[1]}
 
 
