@@ -27,10 +27,10 @@ async def manual_mode(x: int, y: int, bg_tasks: BackgroundTasks):
 
 
 @app.get('/position')
-async def manual_mode():
+async def get_pos():
     coords = logics_main.get_robot_pos()
     if coords is None:
-        return {'x': 0, 'y': 0}
+        raise HTTPException(status_code=500, detail='Робот не найден')
     return {'x': coords[0], 'y': coords[1]}
 
 

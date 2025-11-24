@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-video = cv2.VideoCapture(0)
+video = cv2.VideoCapture(1)
 
 
 ret, img = video.read()
