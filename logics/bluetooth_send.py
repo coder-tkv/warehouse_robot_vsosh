@@ -9,27 +9,26 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 def send_to_robot(to_send):
     f = True
     i = 3
-    print('bluetooth start, time:', i)
+    print('Bluetooth включен, время поиска:', i, 'секунды')
     while f:
         target_name = "ESP32BT-EGGR"
         target_address = None
         nearby_devices = bluetooth.discover_devices(lookup_names=True, lookup_class=True, duration=i)
-        print(nearby_devices)
+        print('Найдены устройства:', nearby_devices)
         for btaddr, btname, btclass in nearby_devices:
             if target_name == btname:
                 target_address = btaddr
                 break
         if target_address is not None:
-            print("found target {} bluetooth device with address {} ".format(target_name, target_address))
             serverMACAddress = target_address
             port = 1
             s = bluetooth.BluetoothSocket(bluetooth.RFCOMM)
             s.connect((serverMACAddress, port))
-            print("connected to {}".format(target_name))
+            print("Подключено к {}".format(target_name))
             s.send(bytes(SECRET_KEY + to_send, 'UTF-8'))
             s.close()
-            print('sended')
+            print('Путь отправлен на робота')
             f = False
         else:
             i += 3
-            print("could not find target bluetooth device nearby, restart, time:", i)
+            print("Робот не найден, новое время поиска:", i, 'секунд')
