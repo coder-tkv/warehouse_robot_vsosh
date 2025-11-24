@@ -35,4 +35,4 @@ async def manual_mode():
 
 
 if __name__ == '__main__':
-    uvicorn.run('backend:app')
+    uvicorn.run('backend:app', host='0.0.0.0')
